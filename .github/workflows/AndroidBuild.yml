@@ -18,11 +18,11 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Build with Gradle
-        uses: wzieba/AppCenter-Github-Action@v1.3.4
-        with:
-          gradlew: './gradlew'
-          args: 'assemble'
+        - name: Setup Gradle
+          uses: gradle/gradle-build-action@v2
+    
+        - name: Execute Gradle build
+              run: ./gradlew build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
