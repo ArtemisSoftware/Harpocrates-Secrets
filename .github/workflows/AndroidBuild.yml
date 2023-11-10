@@ -15,8 +15,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run tests
-        run: ./gradlew test
+      - name: Execute Gradle command - testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
