@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run tests
         run: ./gradlew test
 
