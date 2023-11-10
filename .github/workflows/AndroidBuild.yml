@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           java-version: '17'
-          distribution:
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
