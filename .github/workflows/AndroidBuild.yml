@@ -19,7 +19,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        uses: wzieba/FakeGradle-action@v1
+        uses: wzieba/AppCenter-Github-Action@v1.3.4
         with:
           gradlew: './gradlew'
           args: 'assemble'
