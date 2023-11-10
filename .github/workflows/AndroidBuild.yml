@@ -19,7 +19,10 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        uses: ./gradlew assemble
+        uses: wzieba/FakeGradle-action@v1
+        with:
+          gradlew: './gradlew'
+          args: 'assemble'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
