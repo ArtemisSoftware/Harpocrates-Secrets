@@ -9,29 +9,9 @@ jobs:
   build:
     runs-on : ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
 
-      - name: Setup Java JDK
-        uses: actions/setup-java@v3.13.0
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Display Gradle Version
-        run: ./gradlew --version
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
 
 
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-
-      - name: Build with Gradle
-        run: ./gradlew build
