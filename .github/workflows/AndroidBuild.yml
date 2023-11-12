@@ -36,8 +36,7 @@ jobs:
 
       - name: Get App version code
         id: version
-        run: |
-          echo "::set-output name=commits::$(git rev-list --count HEAD)"        
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -47,3 +46,15 @@ jobs:
 
       - name: Run Unit Test
         run: ./gradlew test
+
+      - run: echo "Building Debug APK."
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
+        run: ./gradlew assembleDebug
+
+      - name: Build apk release project (APK) - ${{ env.main_project_module }} module
+        run: ./gradlew assemble
+
+      - run: echo "Build status report=${{ job.status }}."
