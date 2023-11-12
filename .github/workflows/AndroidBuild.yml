@@ -34,4 +34,4 @@ jobs:
 
 
       - name: Build with Gradle
-        uses: ./gradlew build
+        run: ./gradlew build
