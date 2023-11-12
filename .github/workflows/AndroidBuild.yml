@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.3
         with:
           name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
-          path: ${{ env.main_project_module }}/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       #      - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
       #        run: ./gradlew assembleDebug
