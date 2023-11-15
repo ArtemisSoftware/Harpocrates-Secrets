@@ -1,8 +1,8 @@
 
-name: Lint debug
+name: Lint debug Job
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
 
