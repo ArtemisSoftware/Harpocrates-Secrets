@@ -11,4 +11,4 @@ jobs:
 
   test:
     name: Test Debug Variant
-    uses: ./.github/workflows/job_test_debug.yml
+    uses: ./.github/workflows/job_tests_debug.yml

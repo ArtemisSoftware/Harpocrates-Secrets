@@ -1,5 +1,5 @@
 
-name: Test debug Job
+name: Job Test debug
 
 on:
   workflow_call:

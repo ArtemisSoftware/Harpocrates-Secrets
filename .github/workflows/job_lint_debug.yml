@@ -1,5 +1,5 @@
 
-name: Lint debug Job
+name: Job Lint debug
 
 on:
   workflow_call:
