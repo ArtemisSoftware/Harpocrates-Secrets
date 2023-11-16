@@ -27,19 +27,19 @@ jobs:
 #
 #      - run: echo "${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated"
 #
-      - name: Get branch name
-        id: branch_name
-        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
+#      - name: Get branch name
+#        id: branch_name
+#        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
 
       - name: Get current date
         id: current_date
-        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
-
-      - name: Set build name
-        id: set_build_name
-        run: |
-          build_name="${{ steps.branch_name.outputs.name }}-${{ steps.current_date.outputs.date }}"
-          echo "::set-output name=build_name::$build_name"
-
-      - name: Display build name
-      - run: echo "${{ steps.set_build_name.outputs.build_name }}"
+      - run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+#
+#      - name: Set build name
+#        id: set_build_name
+#        run: |
+#          build_name="${{ steps.branch_name.outputs.name }}-${{ steps.current_date.outputs.date }}"
+#          echo "::set-output name=build_name::$build_name"
+#
+#      - name: Display build name
+#      - run: echo "${{ steps.set_build_name.outputs.build_name }}"
