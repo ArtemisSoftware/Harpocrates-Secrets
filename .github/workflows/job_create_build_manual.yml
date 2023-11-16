@@ -25,4 +25,4 @@ jobs:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
 
-      - run: echo ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
+      - run: echo "${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated"
