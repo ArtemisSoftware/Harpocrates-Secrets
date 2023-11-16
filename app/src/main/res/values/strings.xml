@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HarpocratesSecrets</string>
+    <string name="unlock_app">Unlock app to add any secret message.</string>
 </resources>
