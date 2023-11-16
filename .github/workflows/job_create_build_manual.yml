@@ -31,8 +31,8 @@ jobs:
 #        id: branch_name
 #        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
 
-      - name: Get current date
-        id: current_date
+#      - name: Get current date
+#        id: current_date
       - run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
 #
 #      - name: Set build name
