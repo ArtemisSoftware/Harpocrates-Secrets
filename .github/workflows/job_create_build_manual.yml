@@ -22,8 +22,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Store LXD version
-        run: echo "LXD_Version=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
-        id: lxd_version
+        id: set_lxd_version
+        run: echo "build_name=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+      - run: echo "${{ steps.set_lxd_version.outputs.build_name }}"
+
+#      - run: echo "${{ steps.set_build_name.outputs.build_name }}"
 
 #      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
 #      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
