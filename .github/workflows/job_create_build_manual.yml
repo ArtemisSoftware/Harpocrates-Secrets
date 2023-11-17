@@ -24,7 +24,7 @@ jobs:
       - name: Store LXD version
         id: set_lxd_version
         run: echo "build_name=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
-      - run: echo "${{ steps.set_lxd_version.outputs.build_name }}"
+      - run: echo "Test ${{ steps.set_lxd_version.outputs.build_name }}"
 
 #      - run: echo "${{ steps.set_build_name.outputs.build_name }}"
 
