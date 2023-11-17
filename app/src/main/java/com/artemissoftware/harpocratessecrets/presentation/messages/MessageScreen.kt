@@ -14,12 +14,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.harpocratessecrets.R
 import com.artemissoftware.harpocratessecrets.domain.models.Message
 import com.artemissoftware.harpocratessecrets.presentation.messages.composables.FloatingButton
+import com.artemissoftware.harpocratessecrets.presentation.messages.composables.MessageDialog
 import com.artemissoftware.harpocratessecrets.presentation.messages.composables.MessageItem
 
 @Composable
@@ -60,6 +60,22 @@ private fun MessageScreenContent(
                 .fillMaxSize()
                 .padding(paddings),
         ) {
+            if (state.showDialog) {
+                MessageDialog(
+                    modifier = Modifier.fillMaxSize(),
+                    secretMessage = state.secretMessage,
+                    onDismiss = {
+                        events.invoke(MessageEvents.ShowDialog(show = false))
+                    },
+                    onAddMessage = {
+                        events.invoke(MessageEvents.AddMessage)
+                    },
+                    onValueChange = {
+                        events.invoke(MessageEvents.UpdateMessageText(text = it))
+                    },
+                )
+            }
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -104,6 +120,19 @@ private fun MessageScreenContent_not_authorized_Preview() {
     MessageScreenContent(
         state = MessageState(
             authorized = false,
+            messages = listOf(Message(id = 1, text = "I am text one"), Message(id = 2, text = "I am text two")),
+        ),
+        events = {},
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun MessageScreenContent_dialog_Preview() {
+    MessageScreenContent(
+        state = MessageState(
+            authorized = false,
+            showDialog = true,
             messages = listOf(Message(id = 1, text = "I am text one"), Message(id = 2, text = "I am text two")),
         ),
         events = {},

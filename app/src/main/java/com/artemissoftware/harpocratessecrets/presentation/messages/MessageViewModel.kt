@@ -29,6 +29,12 @@ class MessageViewModel constructor(private val messageRepository: MessageReposit
             is MessageEvents.ShowDialog -> {
                 showDialog(events.show)
             }
+            is MessageEvents.UpdateMessageText -> {
+                updateMessageText(events.text)
+            }
+            MessageEvents.AddMessage -> {
+                addMessage()
+            }
         }
     }
 
@@ -60,5 +66,18 @@ class MessageViewModel constructor(private val messageRepository: MessageReposit
         update {
             it.copy(showDialog = show)
         }
+    }
+
+    private fun updateMessageText(text: String) = with(_state) {
+        update {
+            it.copy(secretMessage = text)
+        }
+    }
+
+    private fun addMessage() = with(_state.value) {
+        viewModelScope.launch {
+            messageRepository.insert(secretMessage)
+        }
+        showDialog(show = false)
     }
 }

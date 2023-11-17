@@ -9,4 +9,8 @@ sealed class MessageEvents {
     data class Delete(val message: Message) : MessageEvents()
 
     data class ShowDialog(val show: Boolean) : MessageEvents()
+
+    data class UpdateMessageText(val text: String) : MessageEvents()
+
+    object AddMessage : MessageEvents()
 }
