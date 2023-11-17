@@ -75,9 +75,11 @@ class MessageViewModel constructor(private val messageRepository: MessageReposit
     }
 
     private fun addMessage() = with(_state.value) {
-        viewModelScope.launch {
-            messageRepository.insert(secretMessage)
+        if (secretMessage.isNotEmpty()) {
+            viewModelScope.launch {
+                messageRepository.insert(secretMessage)
+            }
+            showDialog(show = false)
         }
-        showDialog(show = false)
     }
 }
