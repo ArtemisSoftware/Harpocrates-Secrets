@@ -6,13 +6,13 @@ import com.artemissoftware.harpocratessecrets.domain.models.Message
 fun MessageEntity.toMessage(): Message {
     return Message(
         id = id,
-        message = message,
+        text = message,
     )
 }
 
 fun Message.toEntity(): MessageEntity {
     return MessageEntity(
         id = id,
-        message = message,
+        message = text,
     )
 }
