@@ -22,17 +22,30 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
+      - name: Current date
+        id: set_current_date
+        run: echo "current_date=$(date +'%d_%m_%_Y__%H_%M_%S')" >> $GITHUB_OUTPUT
+
+
+      - name: Get branch name
+        id: set_branch_name
+        run: echo "branch_name = $(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
+
+      - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "Current date ${{ steps.set_current_date.outputs.current_date }}"
+      - run: echo "Branch name  ${{ steps.set_branch_name.outputs.branch_name }}"
+
 #      - name: Get branch name
 #        id: branch_name
 #        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
 #
 
-      - name: Store LXD version
-        id: set_lxd_version
-        run: echo "build_name=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
-      - run: echo "Test ${{ steps.set_lxd_version.outputs.build_name }}"
+#      - name: Store LXD version
+#        id: set_lxd_version
+#        run: echo "build_name=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+#      - run: echo "Test ${{ steps.set_lxd_version.outputs.build_name }}"
 
-
+#      - run: echo "${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated"
 
 #      - name: Get current date
 #        id: date
