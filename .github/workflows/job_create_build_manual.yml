@@ -32,10 +32,11 @@ jobs:
         run: echo "name=$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
 
       - name: Set build name
-        id: build_name
+        id: set_build_name
         run: |
           build_name="${{ steps.branch_name.outputs.name }}-${{ steps.current_date.outputs.name }}"
           echo "::set-output name=build_name::$build_name"
+
 
       - name: Display build name
       - run: echo "${{ steps.set_build_name.outputs.build_name }}"
