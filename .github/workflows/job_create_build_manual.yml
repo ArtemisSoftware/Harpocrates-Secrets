@@ -31,6 +31,10 @@ jobs:
         id: branch_name
         run: echo "name=$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
 
+      - name: Get App version code
+        id: version
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+
       - name: Set build name
         id: set_build_name
         run: |
