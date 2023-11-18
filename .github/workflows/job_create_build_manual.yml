@@ -29,7 +29,7 @@ jobs:
 
       - name: Get branch name
         id: branch_name
-        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
+        run: echo "name=$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
 
 
       - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
