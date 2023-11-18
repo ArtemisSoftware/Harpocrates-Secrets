@@ -26,14 +26,20 @@ jobs:
         id: current_date
         run: echo "name=$(date +'%d_%m_%_Y__%H_%M_%S')" >> $GITHUB_OUTPUT
 
+      - run: echo "Current date ${{ steps.current_date.outputs.name }}"
 
       - name: Get branch name
         id: branch_name
         run: echo "name=$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
 
+
+      - run: echo "Branch name  ${{ steps.branch_name.outputs.name }}"
+
       - name: Get App version code
         id: version
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+        run: echo "name=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+
+      - run: echo "App version code  ${{ steps.version.outputs.name }}"
 
       - name: Set build name
         id: set_build_name
@@ -46,8 +52,7 @@ jobs:
         run: echo "${{ steps.set_build_name.outputs.build_name }}"
 
       - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "Current date ${{ steps.current_date.outputs.name }}"
-      - run: echo "Branch name  ${{ steps.branch_name.outputs.name }}"
+
 
 
 
