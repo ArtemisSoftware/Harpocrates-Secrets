@@ -1,0 +1,46 @@
+name: Job Create Build
+
+on:
+  workflow_call:
+
+jobs:
+
+  app_release:
+    name: Create Build
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Get branch name
+        id: branch_name
+        run: echo "name=$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Building Debug APK
+        run: ./gradlew build
+
+      - name: Upload APK Debug
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: ${{ steps.branch_name.outputs.name }} - debug APK
+          path: app/build/outputs/apk/debug/app-debug.apk

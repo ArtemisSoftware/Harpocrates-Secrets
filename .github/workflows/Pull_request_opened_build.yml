@@ -11,4 +11,10 @@ jobs:
 
   test:
     name: Test Debug Variant
+    needs: lint
     uses: ./.github/workflows/job_tests_debug.yml
+
+  app_build:
+    name: Build create apks
+    needs: test
+    uses: ./.github/workflows/job_create_build.yml
