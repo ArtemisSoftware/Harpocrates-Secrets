@@ -1,5 +1,6 @@
 [versions]
 agp = "8.1.2"
+biometric = "1.1.0"
 org-jetbrains-kotlin-android = "1.9.0"
 core-ktx = "1.12.0"
 junit = "4.13.2"
@@ -38,6 +39,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin"  }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin"  }
 
+# Biometric
+biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric"  }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
