@@ -28,12 +28,13 @@ jobs:
 
 
       - name: Get branch name
-        id: set_branch_name
-        run: echo "branch_name = $(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')" >> $GITHUB_OUTPUT
+        id: branch_name
+        run: echo "::set-output name=name::$(echo $GITHUB_REF | sed -n 's/refs\/heads\///p')"
+
 
       - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "Current date ${{ steps.set_current_date.outputs.current_date }}"
-      - run: echo "Branch name  ${{ steps.set_branch_name.outputs.branch_name }}"
+      - run: echo "Branch name  ${{ steps.branch_name.outputs.name }}"
 
 #      - name: Get branch name
 #        id: branch_name
