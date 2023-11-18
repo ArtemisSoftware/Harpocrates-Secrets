@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,9 +22,16 @@ import com.artemissoftware.harpocratessecrets.domain.models.Message
 import com.artemissoftware.harpocratessecrets.presentation.messages.composables.FloatingButton
 import com.artemissoftware.harpocratessecrets.presentation.messages.composables.MessageDialog
 import com.artemissoftware.harpocratessecrets.presentation.messages.composables.MessageItem
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MessageScreen() {
+fun MessageScreen(viewModel: MessageViewModel = koinViewModel()) {
+    val state = viewModel.state.collectAsState().value
+
+    MessageScreenContent(
+        state = state,
+        events = viewModel::onTriggerEvent,
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
