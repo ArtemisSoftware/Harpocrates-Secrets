@@ -39,7 +39,7 @@ jobs:
 
 
       - name: Display build name
-      - run: echo "${{ steps.set_build_name.outputs.build_name }}"
+        run: echo "${{ steps.set_build_name.outputs.build_name }}"
 
       - run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "Current date ${{ steps.current_date.outputs.name }}"
