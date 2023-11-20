@@ -25,20 +25,28 @@ import com.artemissoftware.harpocratessecrets.presentation.messages.composables.
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MessageScreen(viewModel: MessageViewModel = koinViewModel()) {
+fun MessageScreen(
+    viewModel: MessageViewModel = koinViewModel(),
+    authorized: Boolean,
+    biometricAuthentication: () -> Unit,
+) {
     val state = viewModel.state.collectAsState().value
 
     MessageScreenContent(
         state = state,
+        authorized = authorized,
         events = viewModel::onTriggerEvent,
+        biometricAuthentication = biometricAuthentication,
     )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun MessageScreenContent(
+    authorized: Boolean,
     state: MessageState,
     events: (MessageEvents) -> Unit,
+    biometricAuthentication: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -46,11 +54,10 @@ private fun MessageScreenContent(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingButton(
-                authorized = state.authorized,
-                onAuthorize = {
-                },
+                authorized = authorized,
+                onAuthorize = biometricAuthentication,
                 onOpenDialog = {
-                    if (state.authorized) {
+                    if (authorized) {
                         events.invoke(MessageEvents.ShowDialog(show = true))
                     } else {
                         Toast.makeText(
@@ -99,7 +106,7 @@ private fun MessageScreenContent(
                             .animateItemPlacement(animationSpec = tween(500))
                             .fillMaxWidth(),
                         message = message.text,
-                        authorized = state.authorized,
+                        authorized = authorized,
                         onDelete = {
                             events.invoke(MessageEvents.Delete(message = message))
                         },
@@ -115,9 +122,10 @@ private fun MessageScreenContent(
 private fun MessageScreenContent_authorized_Preview() {
     MessageScreenContent(
         state = MessageState(
-            authorized = true,
             messages = listOf(Message(id = 1, text = "I am text one"), Message(id = 2, text = "I am text two")),
         ),
+        authorized = true,
+        biometricAuthentication = {},
         events = {},
     )
 }
@@ -127,9 +135,10 @@ private fun MessageScreenContent_authorized_Preview() {
 private fun MessageScreenContent_not_authorized_Preview() {
     MessageScreenContent(
         state = MessageState(
-            authorized = false,
             messages = listOf(Message(id = 1, text = "I am text one"), Message(id = 2, text = "I am text two")),
         ),
+        authorized = false,
+        biometricAuthentication = {},
         events = {},
     )
 }
@@ -139,10 +148,11 @@ private fun MessageScreenContent_not_authorized_Preview() {
 private fun MessageScreenContent_dialog_Preview() {
     MessageScreenContent(
         state = MessageState(
-            authorized = false,
             showDialog = true,
             messages = listOf(Message(id = 1, text = "I am text one"), Message(id = 2, text = "I am text two")),
         ),
+        authorized = false,
+        biometricAuthentication = {},
         events = {},
     )
 }

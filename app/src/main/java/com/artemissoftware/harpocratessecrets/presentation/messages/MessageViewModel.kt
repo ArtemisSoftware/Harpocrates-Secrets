@@ -1,15 +1,19 @@
 package com.artemissoftware.harpocratessecrets.presentation.messages
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artemissoftware.harpocratessecrets.domain.models.Message
 import com.artemissoftware.harpocratessecrets.domain.repository.MessageRepository
+import com.artemissoftware.harpocratessecrets.presentation.utils.BiometricHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MessageViewModel constructor(private val messageRepository: MessageRepository) : ViewModel() {
+class MessageViewModel constructor(
+    private val messageRepository: MessageRepository,
+) : ViewModel() {
 
     private val _state = MutableStateFlow(MessageState())
     val state = _state.asStateFlow()

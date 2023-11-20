@@ -12,5 +12,5 @@ sealed class MessageEvents {
 
     data class UpdateMessageText(val text: String) : MessageEvents()
 
-    object AddMessage : MessageEvents()
+    data object AddMessage : MessageEvents()
 }
