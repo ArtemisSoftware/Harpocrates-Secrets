@@ -5,7 +5,12 @@ env:
   main_project_module: app
 
 on:
-  workflow_dispatch:
+#  workflow_dispatch:
+    push:
+      branches:
+        - '*'
+      except:
+        - master
 
 jobs:
 
