@@ -12,5 +12,7 @@ jobs:
 
       - name: Generate App Version Name
         run: echo "VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')" >> $GITHUB_ENV
+      - run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 
+      - run: echo "${{ secrets.SIGNING_KEY_ALIAS  }}"
       - run: echo "${{ secrets.SIGNING_KEY_ALIAS  }}"
