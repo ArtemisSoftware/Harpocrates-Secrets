@@ -13,9 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4.1.1
 
-      - name: Generate App Version Name
-        run: echo "VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')" >> $GITHUB_ENV
-      - run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+      - name: Set Version Name
+        run: |
+          VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
       - run: echo "${{ env.VERSION_NAME  }}"
       - run: echo "${{ secrets.SIGNING_KEY_ALIAS  }}"
