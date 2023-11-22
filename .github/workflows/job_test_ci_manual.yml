@@ -1,0 +1,16 @@
+name: Job Test CI
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Test CI
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Generate App Version Name
+        run: echo "VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')" >> $GITHUB_ENV
+
+      - run: echo "${{ secrets.SIGNING_KEY_ALIAS  }}"
